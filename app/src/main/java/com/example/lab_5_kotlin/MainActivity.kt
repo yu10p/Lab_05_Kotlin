@@ -3,11 +3,12 @@ package com.example.lab_5_kotlin
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +39,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showToast(){
-
-        val layout = this.layoutInflater.inflate(
-            R.layout.custom_toast,
-            this.findViewById(R.id.custom_toast_root)
-        )
-        val toast = Toast.makeText(this,"test",Toast.LENGTH_SHORT)
+        val toast = Toast(this)
         toast.setGravity(Gravity.TOP,0,50)
-        toast.view = layout
+        toast.duration = Toast.LENGTH_SHORT
+        val inflater = layoutInflater
+        val layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_root))
+        toast.setView(layout)
         toast.show()
-
-
     }
 
     private fun showListDialog(){
